@@ -37,7 +37,7 @@ Resources:
           -
             Action:
               - "s3:GetObject"
-            Effect: "Allow"W
+            Effect: "Allow"
             Resource: !Sub "arn:aws:s3:::${S3-SRT-Bucket}/*"
             Principal: "*"
 Outputs:
