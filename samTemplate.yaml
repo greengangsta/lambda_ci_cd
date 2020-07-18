@@ -21,7 +21,7 @@ Resources:
       Environment:
         Variables:
           REGION: ap-south-1
-  S3-SRT-Bucket:
+  S3SRTBucket:
     Type: AWS::S3::Bucket
     Properties:
       AccessControl: PublicRead
@@ -31,25 +31,25 @@ Resources:
   S3WebsiteBucketPolicy:
     Type: AWS::S3::BucketPolicy
     Properties:
-      Bucket: !Ref S3-SRT-Bucket
+      Bucket: !Ref S3SRTBucket
       PolicyDocument:
         Statement:
           -
             Action:
               - "s3:GetObject"
             Effect: "Allow"
-            Resource: !Sub "arn:aws:s3:::${S3-SRT-Bucket}/*"
+            Resource: !Sub "arn:aws:s3:::${S3SRTBucket}/*"
             Principal: "*"
 Outputs:
   BucketName:
-    Value: !Ref S3-SRT-Bucket
+    Value: !Ref S3SRTBucket
     Description: The created bucket name
   WebsiteURL:
-    Value: !GetAtt S3-SRT-Bucket.WebsiteURL
+    Value: !GetAtt S3SRTBucket.WebsiteURL
     Description: URL for the website hosted on S3
-  S3-SRT-BucketSecureURL:
+  S3SRTBucketSecureURL:
     Value: !Sub
         - https://${Domain}
-        - Domain: !GetAtt S3-SRT-Bucket.DomainName
+        - Domain: !GetAtt S3SRTBucket.DomainName
     Description: Name of the S3 bucket to hold website content
   
